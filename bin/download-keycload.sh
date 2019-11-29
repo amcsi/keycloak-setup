@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-version=8.0.0
-filename=keycloak-$version.zip
+source $(dirname "${0}")/variables
 
-wget https://downloads.jboss.org/keycloak/$version/$filename
+# Download the Standalone server distribution from https://www.keycloak.org/downloads.html
+# e.g. https://downloads.jboss.org/keycloak/8.0.0/keycloak-8.0.0.zip
+wget https://downloads.jboss.org/keycloak/$version/$archiveName
+
 unzip $filename
