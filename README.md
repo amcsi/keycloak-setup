@@ -10,4 +10,6 @@ Java 8 JDK is needed
 1. Run `bin/start-keycloak.sh` to run the keycloak server.
     1. Pass `-Djboss.http.port=<port>` as an argument to change the listening port from the default of 8080.
 1. Visit `http://localhost:8080`.
+1. Create an initial user in the left column.
+1. Enter Administration Console and log in with the user you created.
 
