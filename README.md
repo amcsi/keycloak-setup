@@ -46,3 +46,4 @@ Java 8 JDK is needed
 1. See that you are redirected to the keycloak login page. Login with your test user (username: "test", password: "pass").
 1. See that you are in the `/secured` path and you see your user's details. Congrats!
 
+You can refresh the page, and you'll still be logged in. No state is persisted on your webapp; instead, on each page load you get redirected to the auth server, then redirected back right away with your token.
