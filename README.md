@@ -47,3 +47,40 @@ Java 8 JDK is needed
 1. See that you are in the `/secured` path and you see your user's details. Congrats!
 
 You can refresh the page, and you'll still be logged in. No state is persisted on your webapp; instead, on each page load you get redirected to the auth server, then redirected back right away with your token.
+
+### Changing the theme
+
+It's possible to change the theme, but you'll need to deal with using ftl templating syntax (Java FreeType). Vscode has a plugin for it. 
+
+1. Go inside the keycloak folder. Substeps are assumed to be relative to that folder.
+    1. Edit `standalone/configuration/standalone.xml` and set these values for development to make sure there's no caching:
+    ```
+        <staticMaxAge>-1</staticMaxAge>
+        <cacheThemes>false</cacheThemes>
+        <cacheTemplates>false</cacheTemplates>
+    ```
+    3. Restart (❗) the keycloak server for the standalone.xml changes to take effect.
+    1. copy `themes/keycloak` to e.g. `themes/example`. That's the theme you will need to edit.
+    1. In `http://localhost:8080` in your realm, go to themes and change your login theme to `example`. You may need to refresh the page for it to appear.
+    1. Save.
+    1. Logout and go to the secured page for the login prompt again, or just go to http://localhost:3000/ in a private tab.
+    1. The login should look the same as before.
+    1. In your theme directory, make some example changes:
+        1. Make a CSS change
+            1. In `login/resources/css/login.css`, locate `.card-pf {` and change the background color from #fff to #aaa (gray).
+            1. Copy `../base/login/template.ftl` (neighboring theme folder ❗) to `login/template.ftl`, and edit that file. `base` is the parent theme, and to make an override, you copy the file you want to override over.
+        1. Make an HTML change
+            1. Open `login/template.ftl`
+            1. Locate `<h1 id="kc-page-title"><#nested "header"></h1>` and delete it. This is the title within the login box.
+        1. Make a text copy change
+            1. Copy to `login/messages/messages_en.properties` over from its base folder.
+            1. Change `doLogIn=Log In` to `doLogIn=Submit`.
+        1. Save the file changes.
+    1. Before refreshing the login page, expect in the white login for for:
+        * The box should change to gray from white
+        * The title above the form fields should disappear
+        * The text for the Log In button on the bottom should change to Submit.
+    1. Refresh to see your changes. 
+        
+    
+    
